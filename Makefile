@@ -6,7 +6,7 @@
 #    By: tjehaes <tjehaes@student.42luxembourg      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 13:11:20 by tjehaes           #+#    #+#              #
-#    Updated: 2024/05/06 13:23:55 by tjehaes          ###   ########.fr        #
+#    Updated: 2024/05/07 09:25:55 by tjehaes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,7 @@ SERVER_OBJ = $(SERVER_SRC:.c=.o)
 CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
 OBJ = $(CLIENT_OBJ) $(SERVER_OBJ)
 
-LIBFT = cd libft && make
 LIBFT_LIB = libft/libft.a
-PRINTF = cd printf && make
 PRINTF_LIB = printf/libftprintf.a
 
 CC = gcc
@@ -38,8 +36,8 @@ $(NAME): lib_compilation ft_server ft_client
 
 lib_compilation:
 	@echo "$(BLUE)STARTING COMPILATION$(NOCOLOR)"
-	@$(LIBFT)
-	@$(PRINTF)
+	@cd libft && make
+	@cd printf && make
 
 ft_server: $(SERVER_OBJ)
 	@$(CC) $(FLAGS) $(SERVER_OBJ) $(PRINTF_LIB) $(LIBFT_LIB) -o server
@@ -53,9 +51,9 @@ clean:
 	@rm -f $(OBJ)
 	@cd libft && make clean
 	@cd printf && make clean
-	@echo "$(BLUE2) ALL OBJ FILES DELETED"
+	@echo "$(BLUE2)ALL OBJ FILES DELETED"
 
-fclean:
+fclean: clean
 	@echo "$(PINK)STARTING FCLEANING$(NOCOLOR)"
 	@rm -f server client
 	@cd libft && make fclean

@@ -6,52 +6,24 @@
 /*   By: tjehaes <tjehaes@student.42luxembourg      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 10:22:51 by tjehaes           #+#    #+#             */
-/*   Updated: 2024/05/06 10:19:54 by tjehaes          ###   ########.fr       */
+/*   Updated: 2024/05/06 12:57:34 by tjehaes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-/*
-void	send_bits(char *str, int pid)
+
+void	send_bits(char c, int pid)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (str[i] != '\0')
-	{
-		j = 7;
-		while (j >= 0)
-		{
-			if (((str[i] >> j) & 1) == 0)
-				kill(pid, SIGUSR1);
-			else if (((str[i] >> j) & 1) == 1)
-				kill(pid, SIGUSR2);
-			usleep(42);
-			j--;
-		}
-		i++;
-	}
-	while (++j < 8)
-	{
-		kill(pid, SIGUSR1);
-		usleep(42);
-	}
-}
-*/
-
-void    send_bits(char c, int pid)
-{
-        int     i;
-
-        i = 0;
 	while (i < 8)
 	{
 		if ((c & (0x01 << i)) != 0)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(60);
+		usleep(50);
 		i++;
 	}
 }
