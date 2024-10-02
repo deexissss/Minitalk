@@ -64,4 +64,4 @@ fclean: clean
 
 re:	fclean all
 
-.PHONY: all minitalk server client clean fclean re libft printf
+.PHONY: all minitalk server client clean fclean re libft_compilation
